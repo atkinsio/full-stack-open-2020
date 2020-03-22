@@ -1,0 +1,17 @@
+title Exercise 0.6: New Note
+
+note over browser:
+User clicks "Save"
+end note
+
+note over browser:
+onsubmit listnerer fires
+end note
+
+note over browser:
+note is pushed to existing array and redrawn locally
+end note
+
+browser->server: HTTP POST https://fullstack-exampleapp.herokuapp.com/new_note_spa \n JSON {content: "foo" date: "bar"}
+server-->browser: JSON {"message":"note created"}
+
