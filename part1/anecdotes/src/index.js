@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom'
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
+
+  const handleVote = () => {
+    const copy = [...points]
+    copy[selected] += 1
+    setPoints(copy)
+  }
+
+  const handleNextAnecdote = () => {
+    const randomAnecdoteSelection = Math.round(Math.random() * (anecdotes.length - 1))
+    setSelected(randomAnecdoteSelection)
+  }
 
   return (
     <>
@@ -10,7 +22,11 @@ const App = (props) => {
         {props.anecdotes[selected]}
       </div>
       <div>
-        <button onClick={() => setSelected(Math.round(Math.random() * (anecdotes.length - 1)))}>next anecdote</button>
+        has {points[selected]} votes
+      </div>
+      <div>
+        <button onClick={handleVote}>vote</button>
+        <button onClick={handleNextAnecdote}>next anecdote</button>
       </div>
     </>
   )
