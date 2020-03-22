@@ -1,0 +1,23 @@
+title Exercise 0.5: Single Page App
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa
+server-->browser: spa HTML
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/spa.js
+server-->browser: spa.js
+
+note over browser:
+spa.js requests data.json
+end note
+
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+server-->browser: data.json \n [content: "foo" date: "bar"]
+
+note over browser:
+event handler renders notes
+end note
+
+note over browser:
+onsubmit listner added to form
+end note
