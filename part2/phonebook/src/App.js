@@ -4,28 +4,46 @@ import PersonForm from './components/PersonForm';
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    {
+      name: 'Arto Hellas',
+      phone: '39-44-5323523'
+    }
   ]);
   const [newName, setNewName] = useState('');
+  const [newPhone, setNewPhone] = useState('');
 
   const handleAddPersonSubmit = (event) => {
-    const person = { name: newName };
+    const person = {
+      name: newName,
+      phone: newPhone
+    };
 
     event.preventDefault();
     persons.some((persons) => persons.name === person.name)
       ? alert(`${person.name} is already added to phonebook`) 
       : setPersons(persons.concat(person));
     setNewName('');
+    setNewPhone('');
   };
 
-  const handleAddPersonInputChange = (event) => {
+  const handleAddPersonNameInputChange = (event) => {
     setNewName(event.target.value);
+  };
+
+  const handleAddPersonPhoneInputChange = (event) => {
+    setNewPhone(event.target.value);
   };
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <PersonForm handleSubmit={handleAddPersonSubmit} handleInput={newName} handleChange={handleAddPersonInputChange} />
+      <PersonForm 
+        handleAddPersonSubmit={handleAddPersonSubmit}
+        handleAddPersonNameInput={newName} 
+        handleAddPersonNameInputChange={handleAddPersonNameInputChange} 
+        handleAddPersonPhoneInput={newPhone} 
+        handleAddPersonPhoneInputChange={handleAddPersonPhoneInputChange}
+      />
       <h2>Numbers</h2>
       <Persons persons={persons} />
     </div>
