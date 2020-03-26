@@ -6,19 +6,30 @@ const App = ({ countries }) => {
   const [search, setSearch] = useState('');
   const [filteredCountries, setFilteredCountries] = useState(countries);
 
-  const includesSearchString = (country) => {
-    return country.name.toLowerCase().includes(search.toLocaleLowerCase())
-  }
-
   const handleSearchInputChange = (event) => {
     setSearch(event.target.value);
-    setFilteredCountries(countries.filter(includesSearchString));
+    setFilteredCountries(
+      countries.filter(country => 
+        country.name.toLowerCase().includes(event.target.value.toLocaleLowerCase())
+      )
+    );
+  }
+
+  const handleShowCountryButton = (event) => {
+    setSearch(event.target.value);
+    setFilteredCountries(countries.filter(country => country.name === event.target.value));
   }
 
   return (
     <>
-      <Search handleSearchInput={search} handleSearchInputChange={handleSearchInputChange} />
-      <Results filteredCountries={filteredCountries} />
+      <Search
+        handleSearchInput={search} 
+        handleSearchInputChange={handleSearchInputChange} 
+      />
+      <Results 
+        filteredCountries={filteredCountries}
+        handleShowCountryButton={handleShowCountryButton} 
+      />
     </>
   );
 }

@@ -2,12 +2,30 @@ import React from 'react';
 import Country from './Country';
 import CountryFull from './CountryFull';
 
-const Results = ({ filteredCountries }) => {
-  return (filteredCountries.length > 10) 
-    ? <div>Too many matches, specify another filter</div>
-    : (filteredCountries.length > 1)
-      ? filteredCountries.map(country => <Country key={country.name} country={country} />)
-      : <CountryFull country={filteredCountries[0]} />;
+//TODO: Refactor to IF statements, final must be === 1 not < 2
+const Results = ({ filteredCountries, handleShowCountryButton }) => {
+  if (filteredCountries.length > 10) {
+    return (
+      <div>Too many matches, specify another filter</div>
+    );
+  } else if (filteredCountries.length > 1) {
+    return (
+      filteredCountries.map(country => 
+        <Country 
+          key={country.name} 
+          country={country} 
+          handleShowCountryButton={handleShowCountryButton} 
+        />)
+    );
+  } else if (filteredCountries.length === 1) {
+    return (
+      <CountryFull country={filteredCountries[0]} />
+    );
+  } else {
+    return (
+      <div>No matching results, specify another filter</div>
+    );
+  }
 }
 
-export default Results;
+export default Results; 
