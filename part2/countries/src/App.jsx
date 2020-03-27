@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import Search from './components/Search';
 import Results from './components/Results';
 
@@ -9,29 +10,33 @@ const App = ({ countries }) => {
   const handleSearchInputChange = (event) => {
     setSearch(event.target.value);
     setFilteredCountries(
-      countries.filter(country => 
-        country.name.toLowerCase().includes(event.target.value.toLocaleLowerCase())
-      )
+      countries.filter((country) => country.name.toLowerCase()
+        .includes(event.target.value.toLocaleLowerCase())),
     );
-  }
+  };
 
   const handleShowCountryButton = (event) => {
     setSearch(event.target.value);
-    setFilteredCountries(countries.filter(country => country.name === event.target.value));
-  }
+    setFilteredCountries(countries.filter((country) => country.name === event.target.value));
+  };
 
   return (
     <>
       <Search
-        handleSearchInput={search} 
-        handleSearchInputChange={handleSearchInputChange} 
+        handleSearchInput={search}
+        handleSearchInputChange={handleSearchInputChange}
       />
-      <Results 
+      <Results
         filteredCountries={filteredCountries}
-        handleShowCountryButton={handleShowCountryButton} 
+        handleShowCountryButton={handleShowCountryButton}
       />
     </>
   );
-}
+};
+
+App.propTypes = {
+  countries: PropTypes.objectOf(PropTypes.string).isRequired,
+};
+
 
 export default App;
