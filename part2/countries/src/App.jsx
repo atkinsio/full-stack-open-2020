@@ -35,7 +35,7 @@ const App = ({ countries }) => {
 };
 
 App.propTypes = {
-  countries: PropTypes.objectOf(PropTypes.string).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 

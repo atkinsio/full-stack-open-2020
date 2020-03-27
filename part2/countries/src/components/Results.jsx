@@ -28,7 +28,7 @@ const Results = ({ filteredCountries, handleShowCountryButton }) => {
 };
 
 Results.propTypes = {
-  filteredCountries: PropTypes.arrayOf(PropTypes.objects).isRequired,
+  filteredCountries: PropTypes.arrayOf(PropTypes.object).isRequired,
   handleShowCountryButton: PropTypes.func.isRequired,
 };
 

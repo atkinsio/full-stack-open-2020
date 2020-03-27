@@ -10,7 +10,7 @@ const Search = ({ handleSearchInput, handleSearchInputChange }) => (
 
 
 Search.propTypes = {
-  handleSearchInput: PropTypes.func.isRequired,
+  handleSearchInput: PropTypes.string.isRequired,
   handleSearchInputChange: PropTypes.func.isRequired,
 };
 
