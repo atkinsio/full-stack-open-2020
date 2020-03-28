@@ -46,6 +46,15 @@ const App = () => {
             setName('');
             setNumber('');
             showNotification(`Updated ${returnedPerson.name}`);
+          })
+          .catch(() => {
+            showNotification(
+              `Error: ${existingPerson[0].name} already deleted`,
+              'red'
+            );
+            setPersons(
+              persons.filter((person) => person.id !== existingPerson[0].id)
+            );
           });
       }
     } else {
@@ -67,9 +76,16 @@ const App = () => {
 
   const handleDeletePersonButton = (id, nameToBeDeleted) => {
     if (confirm(`Delete ${nameToBeDeleted}?`)) {
-      personService.remove(id);
-      setPersons(persons.filter((person) => person.id !== id));
-      showNotification(`Deleted ${nameToBeDeleted}`, 'red');
+      personService
+        .remove(id)
+        .then(() => {
+          setPersons(persons.filter((person) => person.id !== id));
+          showNotification(`Deleted ${nameToBeDeleted}`);
+        })
+        .catch(() => {
+          showNotification(`Error: ${nameToBeDeleted} already deleted`, 'red');
+          setPersons(persons.filter((person) => person.id !== id));
+        });
     }
   };
 
