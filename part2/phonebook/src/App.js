@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import Persons from './components/Persons';
@@ -38,10 +39,15 @@ const App = () => {
 
   const handleFilterInputChange = (event) => setFilter(event.target.value);
 
+  const handleDeletePersonButton = (id, name) => {
+    if (confirm(`Delete ${name}?`)) {
+      personService.remove(id);
+      setPersons(persons.filter((person) => person.id !== id));
+    }
+  };
+
   useEffect(() => {
-    personService.getAll().then((initialPersons) => {
-      setPersons(initialPersons);
-    });
+    personService.getAll().then((initialPersons) => setPersons(initialPersons));
   }, []);
 
   return (
@@ -60,7 +66,11 @@ const App = () => {
         handleAddPersonNumberInputChange={handleAddPersonNumberInputChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={persons} filter={filter} />
+      <Persons
+        persons={persons}
+        filter={filter}
+        handleDeletePersonButton={handleDeletePersonButton}
+      />
     </div>
   );
 };

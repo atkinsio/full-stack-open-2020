@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Person from './Person';
 
-const Persons = ({ persons, filter }) => {
+const Persons = ({ persons, filter, handleDeletePersonButton }) => {
   const filteredPersons = persons.filter((person) =>
     person.name.toLowerCase().includes(filter.toLowerCase())
   );
@@ -10,7 +10,11 @@ const Persons = ({ persons, filter }) => {
   return (
     <div>
       {filteredPersons.map((person) => (
-        <Person key={person.name} person={person} />
+        <Person
+          key={person.name}
+          person={person}
+          handleDeletePersonButton={handleDeletePersonButton}
+        />
       ))}
     </div>
   );
@@ -18,7 +22,8 @@ const Persons = ({ persons, filter }) => {
 
 Persons.propTypes = {
   filter: PropTypes.string.isRequired,
-  persons: PropTypes.arrayOf(PropTypes.object).isRequired
+  persons: PropTypes.arrayOf(PropTypes.object).isRequired,
+  handleDeletePersonButton: PropTypes.func.isRequired
 };
 
 export default Persons;

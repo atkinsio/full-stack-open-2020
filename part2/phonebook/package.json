@@ -20,7 +20,8 @@
     "server": "json-server -p3001 --watch db.json"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "env": {"broswer": true}
   },
   "browserslist": {
     "production": [
