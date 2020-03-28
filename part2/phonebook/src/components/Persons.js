@@ -11,7 +11,7 @@ const Persons = ({ persons, filter, handleDeletePersonButton }) => {
     <div>
       {filteredPersons.map((person) => (
         <Person
-          key={person.name}
+          key={person.id}
           person={person}
           handleDeletePersonButton={handleDeletePersonButton}
         />
