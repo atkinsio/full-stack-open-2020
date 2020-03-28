@@ -65,3 +65,5 @@ part2/node_modules/ms/license.md
 part2/node_modules/ms/package.json
 part2/node_modules/ms/readme.md
 part2/countries/.eslintrc.js
+part2/phonebook/.eslintrc.js
+part2/phonebook/.prettierrc.js

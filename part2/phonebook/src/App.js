@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Persons from './components/Persons';
@@ -11,15 +12,19 @@ const App = () => {
   const [filter, setFilter] = useState('');
 
   const handleAddPersonSubmit = (event) => {
-    const person = {
+    const newPerson = {
       name: newName,
       number: newNumber
     };
 
     event.preventDefault();
-    persons.some((persons) => persons.name === person.name)
-      ? alert(`${person.name} is already added to phonebook`) 
-      : setPersons(persons.concat(person));
+
+    if (persons.filter((person) => person.name === newPerson.name).length > 0) {
+      alert(`${newPerson.name} is already added to phonebook`);
+    } else {
+      setPersons(persons.concat(newPerson));
+    }
+
     setNewName('');
     setNewNumber('');
   };
@@ -37,30 +42,30 @@ const App = () => {
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:3001/persons')
-      .then(response => {
-        setPersons(response.data)
-      })
-  }, [])
+    axios.get('http://localhost:3001/persons').then((response) => {
+      setPersons(response.data);
+    });
+  }, []);
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Filter handleFilterInput={filter} handleFilterInputChange={handleFilterInputChange} />
+      <Filter
+        handleFilterInput={filter}
+        handleFilterInputChange={handleFilterInputChange}
+      />
       <h2>add a new</h2>
-      <PersonForm 
+      <PersonForm
         handleAddPersonSubmit={handleAddPersonSubmit}
-        handleAddPersonNameInput={newName} 
-        handleAddPersonNameInputChange={handleAddPersonNameInputChange} 
-        handleAddPersonNumberInput={newNumber} 
+        handleAddPersonNameInput={newName}
+        handleAddPersonNameInputChange={handleAddPersonNameInputChange}
+        handleAddPersonNumberInput={newNumber}
         handleAddPersonNumberInputChange={handleAddPersonNumberInputChange}
       />
       <h2>Numbers</h2>
       <Persons persons={persons} filter={filter} />
     </div>
   );
-}
-
+};
 
 export default App;
