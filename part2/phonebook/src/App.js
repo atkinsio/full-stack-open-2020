@@ -22,24 +22,23 @@ const App = () => {
     if (persons.filter((person) => person.name === newPerson.name).length > 0) {
       alert(`${newPerson.name} is already added to phonebook`);
     } else {
-      setPersons(persons.concat(newPerson));
+      axios
+        .post('http://localhost:3001/persons', newPerson)
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+          setNewName('');
+          setNewNumber('');
+        });
     }
-
-    setNewName('');
-    setNewNumber('');
   };
 
-  const handleAddPersonNameInputChange = (event) => {
+  const handleAddPersonNameInputChange = (event) =>
     setNewName(event.target.value);
-  };
 
-  const handleAddPersonNumberInputChange = (event) => {
+  const handleAddPersonNumberInputChange = (event) =>
     setNewNumber(event.target.value);
-  };
 
-  const handleFilterInputChange = (event) => {
-    setFilter(event.target.value);
-  };
+  const handleFilterInputChange = (event) => setFilter(event.target.value);
 
   useEffect(() => {
     axios.get('http://localhost:3001/persons').then((response) => {
