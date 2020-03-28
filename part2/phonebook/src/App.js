@@ -8,39 +8,54 @@ import personService from './services/person';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState('');
-  const [newNumber, setNewNumber] = useState('');
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
   const [filter, setFilter] = useState('');
 
   const handleAddPersonSubmit = (event) => {
-    const newPerson = {
-      name: newName,
-      number: newNumber
-    };
+    const newPerson = { name, number };
+    const existingPerson = persons.filter(
+      (person) => person.name === newPerson.name
+    );
 
     event.preventDefault();
 
-    if (persons.filter((person) => person.name === newPerson.name).length > 0) {
-      alert(`${newPerson.name} is already added to phonebook`);
+    if (existingPerson.length > 0) {
+      if (
+        confirm(
+          `${existingPerson[0].name} is already added to the phonebook, would you like to update their contact number?`
+        )
+      ) {
+        personService
+          .update(existingPerson[0].id, newPerson)
+          .then((returnedPerson) => {
+            setPersons(
+              persons.map((person) =>
+                person.id !== returnedPerson.id ? person : returnedPerson
+              )
+            );
+            setName('');
+            setNumber('');
+          });
+      }
     } else {
       personService.create(newPerson).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
-        setNewName('');
-        setNewNumber('');
+        setName('');
+        setNumber('');
       });
     }
   };
 
-  const handleAddPersonNameInputChange = (event) =>
-    setNewName(event.target.value);
+  const handleAddPersonNameInputChange = (event) => setName(event.target.value);
 
   const handleAddPersonNumberInputChange = (event) =>
-    setNewNumber(event.target.value);
+    setNumber(event.target.value);
 
   const handleFilterInputChange = (event) => setFilter(event.target.value);
 
-  const handleDeletePersonButton = (id, name) => {
-    if (confirm(`Delete ${name}?`)) {
+  const handleDeletePersonButton = (id, nameToBeDeleted) => {
+    if (confirm(`Delete ${nameToBeDeleted}?`)) {
       personService.remove(id);
       setPersons(persons.filter((person) => person.id !== id));
     }
@@ -60,9 +75,9 @@ const App = () => {
       <h2>add a new</h2>
       <PersonForm
         handleAddPersonSubmit={handleAddPersonSubmit}
-        handleAddPersonNameInput={newName}
+        handleAddPersonNameInput={name}
         handleAddPersonNameInputChange={handleAddPersonNameInputChange}
-        handleAddPersonNumberInput={newNumber}
+        handleAddPersonNumberInput={number}
         handleAddPersonNumberInputChange={handleAddPersonNumberInputChange}
       />
       <h2>Numbers</h2>
