@@ -29,7 +29,7 @@ const App = () => {
 
     if (existingPerson.length > 0) {
       if (
-        confirm(
+        window.confirm(
           `${existingPerson[0].name} is already added to the phonebook, would you like to update their contact number?`
         )
       ) {
@@ -73,7 +73,7 @@ const App = () => {
   const handleFilterInputChange = (event) => setFilter(event.target.value);
 
   const handleDeletePersonButton = (id, nameToBeDeleted) => {
-    if (confirm(`Delete ${nameToBeDeleted}?`)) {
+    if (window.confirm(`Delete ${nameToBeDeleted}?`)) {
       personService
         .remove(id)
         .then(() => {

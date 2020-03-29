@@ -14,8 +14,7 @@ module.exports = {
   "rules": {
     "jsx-a11y/href-no-hash": ["off"],
     "react/jsx-filename-extension": ["warn", { "extensions": [".js", ".jsx"] }],
-    "no-conole": 0,
-    "no-restricted-globals": 0,
+    "no-console": 0,
     "no-alert": 0,
     "max-len": [
       "warn",
