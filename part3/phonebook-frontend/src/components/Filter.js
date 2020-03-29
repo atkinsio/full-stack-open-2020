@@ -3,7 +3,7 @@ import React from 'react';
 
 const Filter = ({ handleFilterInput, handleFilterInputChange }) => (
   <div>
-    filter shown with{' '}
+    Apply filter to shown numbers:{' '}
     <input value={handleFilterInput} onChange={handleFilterInputChange} />
   </div>
 );

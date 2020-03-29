@@ -4,7 +4,7 @@ import React from 'react';
 const Notification = ({ message }) => {
   const notificationStyle = {
     color: message.color,
-    background: 'lightgrey',
+    background: '#282c34',
     fontSize: '20px',
     borderStyle: 'solid',
     borderRadius: '5px',

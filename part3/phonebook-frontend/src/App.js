@@ -12,7 +12,7 @@ const App = () => {
   const [filter, setFilter] = useState('');
   const [message, setMessage] = useState({ content: null });
 
-  const showNotification = (content, color = 'green') => {
+  const showNotification = (content, color = '#61dafb') => {
     setMessage({ content, color });
     setTimeout(() => {
       setMessage({ content: null });
@@ -93,13 +93,14 @@ const App = () => {
 
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
+      <hr />
       <Notification message={message} />
       <Filter
         handleFilterInput={filter}
         handleFilterInputChange={handleFilterInputChange}
       />
-      <h2>add a new</h2>
+      <h2>New Entry</h2>
       <PersonForm
         handleAddPersonSubmit={handleAddPersonSubmit}
         handleAddPersonNameInput={name}

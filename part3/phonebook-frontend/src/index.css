@@ -25,6 +25,10 @@ input, button {
   padding: 3px;
 }
 
+hr {
+  margin: 0 0 20px 0;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

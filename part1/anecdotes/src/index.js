@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
+import './index.css';
 
 const App = (props) => {
   const [selected, setSelected] = useState(0)

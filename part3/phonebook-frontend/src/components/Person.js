@@ -3,12 +3,12 @@ import React from 'react';
 
 const Person = ({ person, handleDeletePersonButton }) => (
   <div>
-    {person.name} {person.number}{' '}
+    <strong>{person.name}</strong> {person.number} ---{' '}
     <button
       type="button"
       onClick={() => handleDeletePersonButton(person.id, person.name)}
     >
-      delete
+      <strong>Delete</strong>
     </button>
   </div>
 );

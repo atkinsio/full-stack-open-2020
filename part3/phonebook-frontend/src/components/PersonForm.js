@@ -10,21 +10,21 @@ const PersonForm = ({
 }) => (
   <form onSubmit={handleAddPersonSubmit}>
     <div>
-      name:{' '}
+      Name:{' '}
       <input
         value={handleAddPersonNameInput}
         onChange={handleAddPersonNameInputChange}
       />
     </div>
     <div>
-      number:{' '}
+      Number:{' '}
       <input
         value={handleAddPersonNumberInput}
         onChange={handleAddPersonNumberInputChange}
       />
     </div>
     <div>
-      <button type="submit">add</button>
+      <button type="submit"><strong>Add</strong></button>
     </div>
   </form>
 );
