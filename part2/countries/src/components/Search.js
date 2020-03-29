@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Search = ({ handleSearchInput, handleSearchInputChange }) => (
   <div>
-    find countries &nbsp;
+    Search: {' '}
     <input value={handleSearchInput} onChange={handleSearchInputChange} />
   </div>
 );

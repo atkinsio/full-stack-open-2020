@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 const Country = ({ country, handleShowCountryButton }) => (
   <div>
-    {country.name}
+    <strong>{country.name}</strong> -
     {' '}
-    <button type="button" value={country.name} onClick={handleShowCountryButton}>show</button>
+    <button type="button" value={country.name} onClick={() => handleShowCountryButton(country.name)}><strong>Show</strong></button>
   </div>
 );
 

@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState } from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
 
 const App = (props) => {
-  const [selected, setSelected] = useState(0)
-  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0))
-  const highestVote = points.indexOf(Math.max(...points))
+  const [selected, setSelected] = useState(0);
+  const [points, setPoints] = useState(new Array(anecdotes.length).fill(0));
+  const highestVote = points.indexOf(Math.max(...points));
 
   const handleVote = () => {
-    const copy = [...points]
-    copy[selected] += 1
-    setPoints(copy)
+    const copy = [...points];
+    copy[selected] += 1;
+    setPoints(copy);
   }
 
   const handleNextAnecdote = () => {
-    const randomAnecdoteSelection = Math.round(Math.random() * (anecdotes.length - 1))
-    setSelected(randomAnecdoteSelection)
+    const randomAnecdoteSelection = Math.round(Math.random() * (anecdotes.length - 1));
+    setSelected(randomAnecdoteSelection);
   }
 
   return (
@@ -23,21 +23,25 @@ const App = (props) => {
       <div>
         <h1>Anecdote of the day</h1>
       </div>
+      <hr />
       <div>
         {props.anecdotes[selected]}
       </div>
       <div>
-        has {points[selected]} votes
+        <em>- {points[selected]} votes</em>
       </div>
       <div>
-        <button onClick={handleVote}>vote</button>
-        <button onClick={handleNextAnecdote}>next anecdote</button>
+        <button onClick={handleVote}>Vote</button>{' '}
+        <button onClick={handleNextAnecdote}>Next</button>
       </div>
       <div>
-        <h1>Anecdote with the most votes</h1>
+        <h2>Anecdote with the most votes</h2>
       </div>
       <div>
         {props.anecdotes[highestVote]}
+      </div>
+      <div>
+        <em>- {points[highestVote]} votes</em>
       </div>
     </>
   )
@@ -50,9 +54,9 @@ const anecdotes = [
   'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
   'Premature optimization is the root of all evil.',
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
+];
 
 ReactDOM.render(
   <App anecdotes={anecdotes} />,
   document.getElementById('root')
-)
+);

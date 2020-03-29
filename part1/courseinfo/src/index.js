@@ -1,40 +1,35 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
 
-const Header = (props) => {
-  return (
-    <div>
-      <h1>{props.course}</h1>
-    </div>
-  )
-}
+const Header = (props) => (
+  <div>
+    <h1>{props.course}</h1>
+    <hr />
+  </div>
+);
 
-const Part = (props) => {
-  return (
-      <p>
-        {props.part} {props.exercises}
-      </p>
-  )
-}
+const Part = (props) => (
+    <p>
+      <strong>{props.part}:</strong> {props.exercises}
+    </p>
+);
 
-const Content = (props) => {
-  return (
-    <div>
-      <Part part={props.parts[0].name} exercises={props.parts[0].exercises} />
-      <Part part={props.parts[1].name} exercises={props.parts[1].exercises} />
-      <Part part={props.parts[2].name} exercises={props.parts[2].exercises} />
-    </div>
-  )
-}
+const Content = (props) => (
+  <div>
+    <Part part={props.parts[0].name} exercises={props.parts[0].exercises} />
+    <Part part={props.parts[1].name} exercises={props.parts[1].exercises} />
+    <Part part={props.parts[2].name} exercises={props.parts[2].exercises} />
+  </div>
+);
 
-const Total = (props) => {
-  return (
-    <div>
-      <p>Number of exercises {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
-    </div>
-  )
-}
+
+const Total = (props) => (
+  <div>
+    <p><strong>Total number of exercises:</strong> {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}</p>
+  </div>
+);
+
 
 const App = () => {
   const course = {
@@ -53,7 +48,7 @@ const App = () => {
         exercises: 14
       }
     ]
-  }
+  };
 
   return (
     <div>
@@ -61,7 +56,7 @@ const App = () => {
       <Content parts={course.parts} />
       <Total parts={course.parts} />
     </div>
-  )
-}
+  );
+};
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'));

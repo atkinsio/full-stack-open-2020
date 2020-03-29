@@ -21,7 +21,9 @@
   },
   "eslintConfig": {
     "extends": "react-app",
-    "env": {"broswer": true}
+    "env": {
+      "broswer": true
+    }
   },
   "browserslist": {
     "production": [

@@ -15,17 +15,20 @@ const App = ({ countries }) => {
     );
   };
 
-  const handleShowCountryButton = (event) => {
-    setSearch(event.target.value);
-    setFilteredCountries(countries.filter((country) => country.name === event.target.value));
+  const handleShowCountryButton = (name) => {
+      setSearch(name);
+      setFilteredCountries(countries.filter((country) => country.name === name));
   };
 
   return (
     <>
+      <h1>Find Countries</h1>
+      <hr />
       <Search
         handleSearchInput={search}
         handleSearchInputChange={handleSearchInputChange}
       />
+      <br />
       <Results
         filteredCountries={filteredCountries}
         handleShowCountryButton={handleShowCountryButton}
