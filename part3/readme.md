@@ -1,1 +1,1 @@
-Part3 of this course is located at https://github.com/atkinsio/full-stack-open-2020-part3
+The backend for phonebook can be found here https://github.com/atkinsio/full-stack-open-2020-part3/phonebook-backend
