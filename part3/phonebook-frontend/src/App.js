@@ -12,7 +12,7 @@ const App = () => {
   const [filter, setFilter] = useState('')
   const [message, setMessage] = useState({ content: null })
 
-  const showNotification = (content, color = 'green') => {
+  const showNotification = (content, color = '#61dafb') => {
     if (content instanceof Error) {
       const errorMessage =
         content.response.data.errorMessage !== undefined
