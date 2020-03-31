@@ -12,11 +12,22 @@ const App = () => {
   const [filter, setFilter] = useState('');
   const [message, setMessage] = useState({ content: null });
 
-  const showNotification = (content, color = '#61dafb') => {
-    setMessage({ content, color });
-    setTimeout(() => {
-      setMessage({ content: null });
-    }, 5000);
+  const showNotification = (content, color = 'green') => {
+    if (content instanceof Error) {
+      const errorMessage =
+        content.response.data.errorMessage !== undefined
+          ? content.response.data.errorMessage
+          : 'Something went wrong!';
+      setMessage({ content: errorMessage, color: 'red' });
+      setTimeout(() => {
+        setMessage({ content: null });
+      }, 5000);
+    } else {
+      setMessage({ content, color });
+      setTimeout(() => {
+        setMessage({ content: null });
+      }, 5000);
+    }
   };
 
   const handleAddPersonSubmit = (event) => {
@@ -45,23 +56,23 @@ const App = () => {
             setNumber('');
             showNotification(`Updated ${returnedPerson.name}`);
           })
-          .catch(() => {
-            showNotification(
-              `Error: ${existingPerson[0].name} already deleted`,
-              'red'
-            );
+          .catch((error) => {
+            showNotification(error);
             setPersons(
               persons.filter((person) => person.id !== existingPerson[0].id)
             );
           });
       }
     } else {
-      personService.create(newPerson).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setName('');
-        setNumber('');
-        showNotification(`Added ${returnedPerson.name}`);
-      });
+      personService
+        .create(newPerson)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+          setName('');
+          setNumber('');
+          showNotification(`Added ${returnedPerson.name}`);
+        })
+        .catch((error) => showNotification(error));
     }
   };
 
@@ -80,8 +91,8 @@ const App = () => {
           setPersons(persons.filter((person) => person.id !== id));
           showNotification(`Deleted ${nameToBeDeleted}`);
         })
-        .catch(() => {
-          showNotification(`Error: ${nameToBeDeleted} already deleted`, 'red');
+        .catch((error) => {
+          showNotification(error);
           setPersons(persons.filter((person) => person.id !== id));
         });
     }
