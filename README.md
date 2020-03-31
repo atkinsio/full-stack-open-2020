@@ -33,3 +33,7 @@ See here for course details: https://fullstackopen.com/en
 - **Part 8: GraphQL**
 
 - **Part 9: Typescript**
+
+## 3 ECTS Course Complete Certificate
+
+![3 ECTS CERT](https://raw.githubusercontent.com/atkinsio/full-stack-open-2020/master/certificate-fullstack-3ects.png)
