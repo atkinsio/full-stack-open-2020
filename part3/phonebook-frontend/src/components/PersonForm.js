@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types'
+import React from 'react'
 
 const PersonForm = ({
   handleAddPersonSubmit,
@@ -24,10 +24,12 @@ const PersonForm = ({
       />
     </div>
     <div>
-      <button type="submit"><strong>Add</strong></button>
+      <button type="submit">
+        <strong>Add</strong>
+      </button>
     </div>
   </form>
-);
+)
 
 PersonForm.propTypes = {
   handleAddPersonNameInput: PropTypes.string.isRequired,
@@ -35,6 +37,6 @@ PersonForm.propTypes = {
   handleAddPersonNumberInput: PropTypes.string.isRequired,
   handleAddPersonNumberInputChange: PropTypes.func.isRequired,
   handleAddPersonSubmit: PropTypes.func.isRequired
-};
+}
 
-export default PersonForm;
+export default PersonForm
