@@ -32,7 +32,8 @@ See here for course details: https://fullstackopen.com/en
 
 - **Part 8: GraphQL**
 
-- **Part 9: Typescript**
+- **Part 9: Typescript**ls
+- 
 
 ## 3 ECTS Course Complete Certificate
 

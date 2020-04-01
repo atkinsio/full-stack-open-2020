@@ -1,0 +1,15 @@
+@baseUrl = http://localhost:3003
+
+###
+GET {{baseUrl}}/api/blogs
+
+###
+POST {{baseUrl}}/api/blogs
+Content-Type: application/json
+
+{
+  "title": "Test",
+  "author": "Aaron",
+  "url": "www.atkinsio.com",
+  "likes": 10
+}
