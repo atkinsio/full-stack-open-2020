@@ -111,7 +111,7 @@ const App = () => {
         handleFilterInput={filter}
         handleFilterInputChange={handleFilterInputChange}
       />
-      <h2>New Entry</h2>
+      <h2>New Phonebook Entry</h2>
       <PersonForm
         handleAddPersonSubmit={handleAddPersonSubmit}
         handleAddPersonNameInput={name}
