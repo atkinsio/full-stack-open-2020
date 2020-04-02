@@ -127,7 +127,7 @@ describe('most blogs', () => {
     const expectedResult = {
       author: 'Edsger W. Dijkstra',
       blogs: 1
-    }
+    };
 
     expect(result).toEqual(expectedResult);
   });
