@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const supertest = require('supertest');
-const app = require('../app');
 const Blog = require('../models/blog');
+const app = require('../app');
 const helper = require('./test_helper');
 
 const api = supertest(app);
@@ -24,6 +24,12 @@ test('there are six blogs', async () => {
   const response = await api.get('/api/blogs');
 
   expect(response.body).toHaveLength(6);
+});
+
+test('blogs contain the transformed id', async () => {
+  const response = await api.get('/api/blogs');
+
+  expect(response.body[0].id).toBeDefined();
 });
 
 afterAll(() => {
