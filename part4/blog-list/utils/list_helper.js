@@ -43,8 +43,27 @@ const mostBlogs = (blogs) => {
   return { author: sortedBlogs[0].author, blogs: sortedBlogs[0].blogs.length };
 };
 
+const mostLikes = (blogs) => {
+  if (blogs.length === 0) {
+    return undefined;
+  }
+
+  const groupedBlogs = _.groupBy(blogs, 'author');
+
+  const sortedBlogs = Object.keys(groupedBlogs)
+    .map((author) => {
+      return { author, likes: totalLikes(groupedBlogs[author]) };
+    })
+    .sort((a, b) => {
+      return b.likes - a.likes;
+    });
+
+  return { author: sortedBlogs[0].author, likes: sortedBlogs[0].likes };
+};
+
 module.exports = {
   totalLikes,
   favouriteBlog,
-  mostBlogs
+  mostBlogs,
+  mostLikes
 };
