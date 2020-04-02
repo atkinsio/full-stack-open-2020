@@ -1,0 +1,47 @@
+{
+  "name": "phonebook-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ../phonebook-frontend/ && npm run build --prod && cp -r build ../phonebook-backend",
+    "deploy": "git push heroku 'git subtree split --prefix phonebook-backend branch':master --force",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atkinsio/full-stack-open-2020-part3.git"
+  },
+  "author": "Aaron Atkins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atkinsio/full-stack-open-2020-part3/issues"
+  },
+  "homepage": "https://github.com/atkinsio/full-stack-open-2020-part3#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.6",
+    "mongoose-unique-validator": "^2.0.3",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^2.0.2"
+  }
+}

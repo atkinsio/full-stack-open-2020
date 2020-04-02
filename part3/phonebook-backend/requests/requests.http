@@ -1,0 +1,30 @@
+@baseUrl = http://localhost:3001
+//@baseUrl = https://afternoon-savannah-28323.herokuapp.com
+@person = 5e81a5a63e75f21f88d8171b
+
+###
+
+GET {{baseUrl}}/api/persons/
+
+###
+
+GET {{baseUrl}}/info/
+
+
+###
+
+GET {{baseUrl}}/api/persons/{{person}}
+
+###
+
+DELETE {{baseUrl}}/api/persons/{{person}}
+
+###
+
+POST {{baseUrl}}/api/persons/
+Content-Type: application/json
+
+{
+  "name": "Aaron",
+  "number": "1234567890"
+}
