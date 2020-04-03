@@ -81,6 +81,15 @@ const validBlogWithMissingLikes = {
   url: 'https://github.com/atkinsio/full-stack-open-2020/part4/'
 };
 
+const blogWithoutUrl = {
+  title: 'Where did my url go?',
+  author: 'Aaron Atkins'
+};
+const blogWithoutTitle = {
+  author: 'Aaron Atkins',
+  url: 'www.bad.example.com.au'
+};
+
 const blogsInDb = async () => {
   const blogs = await Blog.find({});
   return blogs.map((blog) => blog.toJSON());
@@ -92,5 +101,7 @@ module.exports = {
   listWithManyBlogs,
   validBlog,
   validBlogWithMissingLikes,
-  blogsInDb
+  blogsInDb,
+  blogWithoutUrl,
+  blogWithoutTitle
 };
