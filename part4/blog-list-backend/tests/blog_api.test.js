@@ -102,3 +102,43 @@ describe('when deleting notes', () => {
     expect(titles).not.toContain(blogToDelete.title);
   });
 });
+
+describe('when updating notes', () => {
+  test('succeeds with correct status code if id is valid', async () => {
+    const blogsAtStart = await helper.blogsInDb();
+    const blogToUpdate = blogsAtStart[0];
+    blogToUpdate.title = 'This blog title has been updated!';
+
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(blogToUpdate)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+
+    const blogsAtEnd = await helper.blogsInDb();
+    expect(blogsAtEnd).toHaveLength(helper.listWithManyBlogs.length);
+
+    const titles = blogsAtEnd.map((blog) => blog.title);
+    expect(titles).toContain(blogToUpdate.title);
+  });
+
+  test('fails with correct status code if id is invalid', async () => {
+    const blogsAtStart = await helper.blogsInDb();
+    const blogToUpdate = blogsAtStart[0];
+
+    await api.delete(`/api/blogs/${blogToUpdate.id}`).expect(204);
+
+    blogToUpdate.title = 'This blog title has been updated!';
+
+    await api
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(blogToUpdate)
+      .expect(400);
+
+    const blogsAtEnd = await helper.blogsInDb();
+    expect(blogsAtEnd).toHaveLength(helper.listWithManyBlogs.length - 1);
+
+    const titles = blogsAtEnd.map((blog) => blog.title);
+    expect(titles).not.toContain(blogToUpdate.title);
+  });
+});
