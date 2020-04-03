@@ -51,3 +51,21 @@ test('a valid blog can be added', async () => {
   const titles = blogsAtEnd.map((blog) => blog.title);
   expect(titles).toContain('How to be a fullstack master');
 });
+
+test('if likes property is missing, value defaults to 0', async () => {
+  const newBlog = helper.validBlogWithMissingLikes;
+
+  await Blog.deleteMany({});
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/);
+
+  const blogsAtEnd = await helper.blogsInDb();
+  expect(blogsAtEnd).toHaveLength(1);
+
+  const likes = blogsAtEnd.map((blog) => blog.likes);
+  expect(likes[0]).toBe(0);
+});

@@ -70,9 +70,15 @@ const listWithManyBlogs = [
 
 const validBlog = {
   title: 'How to be a fullstack master',
-  author: 'Aaron',
+  author: 'Aaron Atkins',
   url: 'https://github.com/atkinsio/full-stack-open-2020',
   likes: 10
+};
+
+const validBlogWithMissingLikes = {
+  title: 'Why does no one ever like my blog?',
+  author: 'Aaron Atkins',
+  url: 'https://github.com/atkinsio/full-stack-open-2020/part4/'
 };
 
 const blogsInDb = async () => {
@@ -85,5 +91,6 @@ module.exports = {
   listWithOneBlog,
   listWithManyBlogs,
   validBlog,
+  validBlogWithMissingLikes,
   blogsInDb
 };
