@@ -35,3 +35,19 @@ test('blogs contain the transformed id', async () => {
 afterAll(() => {
   mongoose.connection.close();
 });
+
+test('a valid blog can be added', async () => {
+  const newBlog = helper.validBlog;
+
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/);
+
+  const blogsAtEnd = await helper.blogsInDb();
+  expect(blogsAtEnd).toHaveLength(helper.listWithManyBlogs.length + 1);
+
+  const titles = blogsAtEnd.map((blog) => blog.title);
+  expect(titles).toContain('How to be a fullstack master');
+});

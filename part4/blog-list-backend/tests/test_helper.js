@@ -68,9 +68,22 @@ const listWithManyBlogs = [
   }
 ];
 
+const validBlog = {
+  title: 'How to be a fullstack master',
+  author: 'Aaron',
+  url: 'https://github.com/atkinsio/full-stack-open-2020',
+  likes: 10
+};
+
+const blogsInDb = async () => {
+  const blogs = await Blog.find({});
+  return blogs.map((blog) => blog.toJSON());
+};
+
 module.exports = {
   listWithNoBlogs,
   listWithOneBlog,
-  listWithManyBlogs
+  listWithManyBlogs,
+  validBlog,
+  blogsInDb
 };
-
