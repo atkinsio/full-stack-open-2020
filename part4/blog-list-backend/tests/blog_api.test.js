@@ -32,6 +32,17 @@ describe('when fethcing notes', () => {
 
     expect(response.body[0].id).toBeDefined();
   });
+
+  test('a specific blog can be returned', async () => {
+    const blogsAtStart = await helper.blogsInDb();
+
+    const response = await api
+      .get(`/api/blogs/${blogsAtStart[0].id}`)
+      .expect(200)
+      .expect('Content-Type', /application\/json/);
+
+    expect(response.body.title).toEqual(blogsAtStart[0].title);
+  });
 });
 
 describe('when creating notes', () => {
@@ -82,10 +93,6 @@ describe('when creating notes', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/);
   });
-});
-
-afterAll(() => {
-  mongoose.connection.close();
 });
 
 describe('when deleting notes', () => {
@@ -142,3 +149,8 @@ describe('when updating notes', () => {
     expect(titles).not.toContain(blogToUpdate.title);
   });
 });
+
+afterAll(() => {
+  mongoose.connection.close();
+});
+

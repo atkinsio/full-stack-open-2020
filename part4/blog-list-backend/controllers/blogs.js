@@ -7,6 +7,16 @@ blogsRouter.get('/', async (request, response) => {
   response.json(blogs.map((blog) => blog.toJSON()));
 });
 
+blogsRouter.get('/:id', async (request, response) => {
+  const blog = await Blog.findOne({ _id: request.params.id });
+
+  if (!blog) {
+    return response.status(404).end();
+  }
+
+  return response.json(blog);
+});
+
 blogsRouter.post('/', async (request, response) => {
   const { title, author, url, likes } = request.body;
 

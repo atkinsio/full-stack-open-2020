@@ -4,12 +4,11 @@
 GET {{baseUrl}}/api/blogs
 
 ###
-PUT {{baseUrl}}/api/blogs/a
+POST {{baseUrl}}/api/blogs
 Content-Type: application/json
 
 {
   "title": "Test",
   "author": "Aaron",
-  "url": "www.atkinsio.com",
-  "likes": 10
+  "url": "www.atkinsio.com"
 }
