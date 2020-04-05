@@ -23,7 +23,7 @@ See here for course details: https://fullstackopen.com/en
   - [Phonebook Back End](https://github.com/atkinsio/full-stack-open-2020/tree/master/part3/phonebook-backend)
   
 - **Part 4: Testing Express servers, user administration**
-  - [Blog List Back End](https://github.com/atkinsio/full-stack-open-2020/tree/master/part4/blog-list)
+  - [Blog List Back End](https://github.com/atkinsio/full-stack-open-2020/tree/master/part4/blog-list-backend)
 
 - **Part 5: Testing React apps**
 
