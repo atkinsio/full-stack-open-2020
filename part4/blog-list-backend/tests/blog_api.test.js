@@ -6,11 +6,20 @@ const helper = require('./test_helper');
 
 const api = supertest(app);
 
+let token = '';
+
 beforeEach(async () => {
   await Blog.deleteMany({});
   const blogs = helper.listWithManyBlogs.map((blog) => new Blog(blog));
   const promiseArray = blogs.map((blog) => blog.save());
   await Promise.all(promiseArray);
+
+  const response = await await api.post('/api/login/').send({
+    username: 'root',
+    password: 'secret'
+  });
+
+  token = response.body.token;
 });
 
 describe('when fethcing notes', () => {
@@ -51,6 +60,7 @@ describe('when creating notes', () => {
 
     await api
       .post('/api/blogs')
+      .set('Authorization', `bearer ${token}`)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/);
@@ -69,6 +79,7 @@ describe('when creating notes', () => {
 
     await api
       .post('/api/blogs')
+      .set('Authorization', `bearer ${token}`)
       .send(newBlog)
       .expect(201)
       .expect('Content-Type', /application\/json/);
@@ -83,12 +94,14 @@ describe('when creating notes', () => {
   test('if title or url are missing appropiate status is returned', async () => {
     await api
       .post('/api/blogs')
+      .set('Authorization', `bearer ${token}`)
       .send(helper.blogWithoutTitle)
       .expect(400)
       .expect('Content-Type', /application\/json/);
 
     await api
       .post('/api/blogs')
+      .set('Authorization', `bearer ${token}`)
       .send(helper.blogWithoutUrl)
       .expect(400)
       .expect('Content-Type', /application\/json/);
@@ -97,13 +110,24 @@ describe('when creating notes', () => {
 
 describe('when deleting notes', () => {
   test('succeeds with correct status code if id is valid', async () => {
-    const blogsAtStart = await helper.blogsInDb();
-    const blogToDelete = blogsAtStart[0];
+    const newBlog = helper.validBlog;
 
-    await api.delete(`/api/blogs/${blogToDelete.id}`).expect(204);
+    const response = await api
+      .post('/api/blogs')
+      .set('Authorization', `bearer ${token}`)
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/);
+
+    const blogToDelete = response.body;
+
+    await api
+      .delete(`/api/blogs/${blogToDelete.id}`)
+      .set('Authorization', `bearer ${token}`)
+      .expect(204);
 
     const blogsAtEnd = await helper.blogsInDb();
-    expect(blogsAtEnd).toHaveLength(helper.listWithManyBlogs.length - 1);
+    expect(blogsAtEnd).toHaveLength(helper.listWithManyBlogs.length);
 
     const titles = blogsAtEnd.map((blog) => blog.title);
     expect(titles).not.toContain(blogToDelete.title);
@@ -127,26 +151,6 @@ describe('when updating notes', () => {
 
     const titles = blogsAtEnd.map((blog) => blog.title);
     expect(titles).toContain(blogToUpdate.title);
-  });
-
-  test('fails with correct status code if id is invalid', async () => {
-    const blogsAtStart = await helper.blogsInDb();
-    const blogToUpdate = blogsAtStart[0];
-
-    await api.delete(`/api/blogs/${blogToUpdate.id}`).expect(204);
-
-    blogToUpdate.title = 'This blog title has been updated!';
-
-    await api
-      .put(`/api/blogs/${blogToUpdate.id}`)
-      .send(blogToUpdate)
-      .expect(400);
-
-    const blogsAtEnd = await helper.blogsInDb();
-    expect(blogsAtEnd).toHaveLength(helper.listWithManyBlogs.length - 1);
-
-    const titles = blogsAtEnd.map((blog) => blog.title);
-    expect(titles).not.toContain(blogToUpdate.title);
   });
 });
 
