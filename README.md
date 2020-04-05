@@ -26,6 +26,8 @@ See here for course details: https://fullstackopen.com/en
   - [Blog List Back End](https://github.com/atkinsio/full-stack-open-2020/tree/master/part4/blog-list-backend)
 
 - **Part 5: Testing React apps**
+  - [Blog List Back End](https://github.com/atkinsio/full-stack-open-2020/tree/master/part5/blog-list-backend)
+  - [Blog List Front End](https://github.com/atkinsio/full-stack-open-2020/tree/master/part5/blog-list-frontend)
 
 - **Part 6: State management with Redux**
 
