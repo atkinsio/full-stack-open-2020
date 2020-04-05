@@ -19,9 +19,8 @@ GET {{baseUrl}}/api/users
 ###
 POST {{baseUrl}}/api/users
 Content-Type: application/json
-
 {
-  "username": "aaron",
+  "username": "aaron2",
   "name": "Aaron2",
   "password": "secret"
 }
@@ -30,6 +29,11 @@ POST {{baseUrl}}/api/login
 Content-Type: application/json
 
 {
-  "username": "aaron",
+  "username": "aaron2",
   "password": "secret"
 }
+###
+DELETE {{baseUrl}}/api/blogs/5e8957483d352b330c109e4c
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhcm9uIiwiaWQiOiI1ZTg5NDQyNTM5YWE5ZDFlZGI2ZDEwMzEiLCJpYXQiOjE1ODYwNTczNzJ9.fz55rRAgSoArOUEM0aRTCQe3jKoGuyuGVLgBEvfr50U
+
