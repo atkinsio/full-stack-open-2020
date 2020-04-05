@@ -1,9 +1,14 @@
+/* eslint-disable no-underscore-dangle */
 const blogsRouter = require('express').Router();
 const Blog = require('../models/blog');
+const User = require('../models/user');
 // const logger = require('../utils/logger');
 
 blogsRouter.get('/', async (request, response) => {
-  const blogs = await Blog.find({});
+  const blogs = await Blog.find({}).populate('userId', {
+    username: 1,
+    name: 1
+  });
   response.json(blogs.map((blog) => blog.toJSON()));
 });
 
@@ -20,12 +25,18 @@ blogsRouter.get('/:id', async (request, response) => {
 blogsRouter.post('/', async (request, response) => {
   const { title, author, url, likes } = request.body;
 
+  const user = await User.findOne();
+
   if (!title || !url) {
     return response.status(400).json({ error: 'Title or URL missing' });
   }
 
-  const blog = new Blog({ title, author, url, likes });
+  const blog = new Blog({ title, author, url, likes, userId: user.id });
   const savedBlog = await blog.save();
+
+  user.blogs = user.blogs.concat(savedBlog._id);
+  await user.save();
+
   return response.status(201).json(savedBlog.toJSON());
 });
 

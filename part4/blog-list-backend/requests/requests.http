@@ -10,7 +10,8 @@ Content-Type: application/json
 {
   "title": "Test",
   "author": "Aaron",
-  "url": "www.atkinsio.com"
+  "url": "www.atkinsio.com",
+  "userId": "5e893de1b7eda3177367ce0a"
 }
 ###
 GET {{baseUrl}}/api/users
