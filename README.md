@@ -38,6 +38,6 @@ See here for course details: https://fullstackopen.com/en
 - **Part 9: Typescript**ls
 - 
 
-## 3 ECTS Course Complete Certificate
+## 5 ECTS Course Complete Certificate
 
-![3 ECTS CERT](https://raw.githubusercontent.com/atkinsio/full-stack-open-2020/master/certificate-fullstack-3ects.png)
+![3 ECTS CERT](https://raw.githubusercontent.com/atkinsio/full-stack-open-2020/master/certificate-fullstack-5ects.png)
