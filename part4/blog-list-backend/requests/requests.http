@@ -25,3 +25,11 @@ Content-Type: application/json
   "name": "Aaron2",
   "password": "secret"
 }
+###
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+  "username": "aaron",
+  "password": "secret"
+}

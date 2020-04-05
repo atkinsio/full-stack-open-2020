@@ -13,7 +13,13 @@ blogsRouter.get('/', async (request, response) => {
 });
 
 blogsRouter.get('/:id', async (request, response) => {
-  const blog = await Blog.findOne({ _id: request.params.id });
+  const blog = await Blog.findOne({ _id: request.params.id }).populate(
+    'userId',
+    {
+      username: 1,
+      name: 1
+    }
+  );
 
   if (!blog) {
     return response.status(404).end();
