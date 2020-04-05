@@ -1,8 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true },
+  username: { type: String, minlength: 3, required: true, unique: true },
   name: { type: String, required: true },
   passwordHash: { type: String, required: true },
   blogs: [
@@ -22,6 +23,8 @@ userSchema.set('toJSON', {
     delete object.passwordHash;
   }
 });
+
+userSchema.plugin(uniqueValidator);
 
 const User = mongoose.model('User', userSchema);
 

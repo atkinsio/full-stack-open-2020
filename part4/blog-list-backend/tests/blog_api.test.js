@@ -153,4 +153,3 @@ describe('when updating notes', () => {
 afterAll(() => {
   mongoose.connection.close();
 });
-
