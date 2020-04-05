@@ -6,12 +6,12 @@ GET {{baseUrl}}/api/blogs
 ###
 POST {{baseUrl}}/api/blogs
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFhcm9uIiwiaWQiOiI1ZTg5NDQyNTM5YWE5ZDFlZGI2ZDEwMzEiLCJpYXQiOjE1ODYwNTczNzJ9.fz55rRAgSoArOUEM0aRTCQe3jKoGuyuGVLgBEvfr50U
 
 {
   "title": "Test",
   "author": "Aaron",
-  "url": "www.atkinsio.com",
-  "userId": "5e893de1b7eda3177367ce0a"
+  "url": "www.atkinsio.com"
 }
 ###
 GET {{baseUrl}}/api/users
