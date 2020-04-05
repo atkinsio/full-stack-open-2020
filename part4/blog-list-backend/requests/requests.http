@@ -12,3 +12,15 @@ Content-Type: application/json
   "author": "Aaron",
   "url": "www.atkinsio.com"
 }
+###
+GET {{baseUrl}}/api/users
+
+###
+POST {{baseUrl}}/api/users
+Content-Type: application/json
+
+{
+  "username": "Aaron",
+  "name": "Aaron2",
+  "password": "secret"
+}
