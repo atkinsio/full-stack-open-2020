@@ -11,8 +11,9 @@ const App = () => {
 
   const showNotification = (content, color = '#61dafb') => {
     if (content instanceof Error) {
+      console.log(content);
       const error =
-        content.response.data.error !== undefined
+        content.response && content.response.data.error !== undefined
           ? content.response.data.error
           : 'Something went wrong!'
       setMessage({ content: error, color: 'red' })
