@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+
 const Blog = ({ blog }) => (
   <div>
-    {blog.title} {blog.author}
+    "{blog.title}" by {blog.author}
   </div>
-)
+);
 
-export default Blog
+export default Blog;
