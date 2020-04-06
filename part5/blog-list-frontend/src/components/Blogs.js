@@ -3,14 +3,19 @@ import blogService from '../services/blogs';
 import Blog from './Blog';
 import BlogForm from './BlogForm';
 
-const Blogs = ({ show }) => {
+const Blogs = ({ show, showNotification }) => {
   const [blogs, setBlogs] = useState([]);
 
   const handleNewBlogSubmit = async (title, author, url) => {
-    const newBlog = {title, author, url};
-    const returnedBlog = await blogService.create(newBlog);
-    setBlogs(blogs.concat(returnedBlog));
-  }
+    try {
+      const newBlog = { title, author, url };
+      const returnedBlog = await blogService.create(newBlog);
+      setBlogs(blogs.concat(returnedBlog));
+      showNotification(`A new blog "${title}" by ${author} has been added`);
+    } catch (exception) {
+      showNotification(exception);
+    }
+  };
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -21,14 +26,14 @@ const Blogs = ({ show }) => {
       <div>
         <BlogForm handleNewBlogSubmit={handleNewBlogSubmit} />
         <h2>Blogs</h2>
-        {blogs.map(blog =>
+        {blogs.map((blog) => (
           <Blog key={blog.id} blog={blog} />
-        )}
-    </div>
+        ))}
+      </div>
     );
   }
 
-  return <div></div>
+  return <div></div>;
 };
 
 export default Blogs;

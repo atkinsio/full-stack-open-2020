@@ -3,9 +3,29 @@ import blogService from './services/blogs';
 import loginService from './services/login';
 import LoginForm from './components/LoginForm';
 import Blogs from './components/Blogs';
+import Notification from './components/Notification';
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [message, setMessage] = useState({ content: null, color: '#61dafb' });
+
+  const showNotification = (content, color = '#61dafb') => {
+    if (content instanceof Error) {
+      const error =
+        content.response.data.error !== undefined
+          ? content.response.data.error
+          : 'Something went wrong!'
+      setMessage({ content: error, color: 'red' })
+      setTimeout(() => {
+        setMessage({ content: null })
+      }, 6000)
+    } else {
+      setMessage({ content, color })
+      setTimeout(() => {
+        setMessage({ content: null })
+      }, 6000)
+    }
+  }
 
   const handleLogin = async (username, password) => {
     try {
@@ -20,12 +40,13 @@ const App = () => {
 
       setUser(user);
     } catch (exception) {
-      // error handling
+      showNotification(exception)
     }
   };
 
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogAppUser');
+    showNotification(`${user.name} has been logged out`)
     setUser(null);
   };
 
@@ -44,6 +65,7 @@ const App = () => {
     <div>
       <h2>Blogs List</h2>
       <hr />
+      <Notification message={message} />
       <LoginForm 
         user={user}
         loginHandler={handleLogin}
@@ -51,6 +73,7 @@ const App = () => {
       />
       <Blogs 
         show={isLoggedIn}
+        showNotification={showNotification}
       />
     </div>
   );
