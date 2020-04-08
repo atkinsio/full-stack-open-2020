@@ -4,9 +4,9 @@ import Blog from './Blog';
 import BlogForm from './BlogForm';
 import Togglable from './Togglable';
 
-const Blogs = ({ show, showNotification }) => {
+const Blogs = ({ user, showNotification }) => {
   const [blogs, setBlogs] = useState([]);
-
+  const sortedBlogs = blogs.sort((a, b) => b.likes - a.likes);
   const blogFormRef = React.createRef();
 
   const handleNewBlogSubmit = async (title, author, url) => {
@@ -21,19 +21,30 @@ const Blogs = ({ show, showNotification }) => {
     }
   };
 
+  const handleDeleteBlog = async (blog) => {
+    if (window.confirm(`Are you sure you want to delete blog "${blog.title}"?`))
+      try {
+        await blogService.remove(blog.id);
+        setBlogs(await blogService.getAll())
+        showNotification(`Blog "${blog.title}" successfully removed`);
+      } catch (exception) {
+        showNotification(exception);
+      }
+  }
+
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
 
-  if (show) {
+  if (user) {
     return (
       <div>
         <Togglable ref={blogFormRef} buttonLabel="New Blog">
           <BlogForm handleNewBlogSubmit={handleNewBlogSubmit} />
         </Togglable>
         <h2>Blogs</h2>
-        {blogs.map((blog) => (
-          <Blog key={blog.id} blog={blog} />
+        {sortedBlogs.map((blog) => (
+          <Blog key={blog.id} blog={blog} user={user} removeBlog={handleDeleteBlog}/>
         ))}
       </div>
     );

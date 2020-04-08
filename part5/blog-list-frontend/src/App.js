@@ -73,7 +73,7 @@ const App = () => {
         logoutHandler={handleLogout}
       />
       <Blogs 
-        show={isLoggedIn}
+        user={user}
         showNotification={showNotification}
       />
     </div>

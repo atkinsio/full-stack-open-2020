@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import blogService from '../services/blogs';
 
-const Blog = ({ blog }) => {
+const Blog = ({ user, blog, removeBlog }) => {
   const [showFullBlog, setShowFullBlog] = useState(false);
   const [likes, setLikes] = useState(blog.likes);
 
@@ -20,16 +20,26 @@ const Blog = ({ blog }) => {
   const increaseLikes = async () => {
     const newBlog = {
       user: blog.user._id,
-      likes: blog.likes,
+      likes: likes + 1,
       author: blog.author,
       title: blog.titile,
       url: blog.url
     };
 
-    newBlog.likes = newBlog.likes + 1;
-
     const returnedBlog = await blogService.update(blog.id, newBlog);
-    setLikes(returnedBlog.likes)
+    setLikes(returnedBlog.likes);
+  };
+
+  const showDeleteIfCorrectUser = () => {
+    if (blog.user.id.toString() === user.id.toString()) {
+      return (
+        <div>
+          <button type="burron" onClick={() => removeBlog(blog)}>Delete</button>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   if (!showFullBlog) {
@@ -53,9 +63,13 @@ const Blog = ({ blog }) => {
       </div>
       <div>{blog.url}</div>
       <div>
-        {likes} <button type="button" onClick={increaseLikes}>Like</button>
+        {likes}{' '}
+        <button type="button" onClick={increaseLikes}>
+          Like
+        </button>
       </div>
       <div>{blog.user.name}</div>
+      {showDeleteIfCorrectUser()}
     </div>
   );
 };
