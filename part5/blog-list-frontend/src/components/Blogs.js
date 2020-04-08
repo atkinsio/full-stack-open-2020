@@ -25,12 +25,12 @@ const Blogs = ({ user, showNotification }) => {
     if (window.confirm(`Are you sure you want to delete blog "${blog.title}"?`))
       try {
         await blogService.remove(blog.id);
-        setBlogs(await blogService.getAll())
+        setBlogs(await blogService.getAll());
         showNotification(`Blog "${blog.title}" successfully removed`);
       } catch (exception) {
         showNotification(exception);
       }
-  }
+  };
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -44,7 +44,12 @@ const Blogs = ({ user, showNotification }) => {
         </Togglable>
         <h2>Blogs</h2>
         {sortedBlogs.map((blog) => (
-          <Blog key={blog.id} blog={blog} user={user} removeBlog={handleDeleteBlog}/>
+          <Blog
+            key={blog.id}
+            blog={blog}
+            user={user}
+            removeBlog={handleDeleteBlog}
+          />
         ))}
       </div>
     );

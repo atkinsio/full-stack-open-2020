@@ -34,7 +34,9 @@ const Blog = ({ user, blog, removeBlog }) => {
     if (blog.user.id.toString() === user.id.toString()) {
       return (
         <div>
-          <button type="burron" onClick={() => removeBlog(blog)}>Delete</button>
+          <button type="burron" onClick={() => removeBlog(blog)}>
+            Delete
+          </button>
         </div>
       );
     }
@@ -45,7 +47,7 @@ const Blog = ({ user, blog, removeBlog }) => {
   if (!showFullBlog) {
     return (
       <div style={blogStyle}>
-        "{blog.title}" by {blog.author}{' '}
+        &quot;{blog.title}&quot; by {blog.author}{' '}
         <button type="button" onClick={toggleVisibility}>
           View
         </button>
@@ -56,7 +58,7 @@ const Blog = ({ user, blog, removeBlog }) => {
   return (
     <div onClick={toggleVisibility} style={blogStyle}>
       <div>
-        "{blog.title}" by {blog.author}{' '}
+      &quot;{blog.title}&quot; by {blog.author}{' '}
         <button type="button" onClick={toggleVisibility}>
           Hide
         </button>

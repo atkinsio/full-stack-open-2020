@@ -10,7 +10,7 @@ const BlogForm = ({ handleNewBlogSubmit }) => {
     setTitle('');
     setAuthor('');
     setUrl('');
-  }
+  };
 
   return (
     <div>
@@ -43,10 +43,7 @@ const BlogForm = ({ handleNewBlogSubmit }) => {
             onChange={({ target }) => setUrl(target.value)}
           />
         </div>
-        <button
-          type="button"
-          onClick={submitBlog}
-        >
+        <button type="button" onClick={submitBlog}>
           Submit
         </button>
       </form>
